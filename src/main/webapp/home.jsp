@@ -8,12 +8,14 @@
 <body>
 
     <!--now we add a form to be putting my values-->
+    <!--
     <form action="addAlien">
         <input type="text" name="aid"><br>
         <input type="text" name="aname"><br>
         <input type="text" name="tech"><br>
         <input type="submit"><br>
     </form>
+    -->
 
     <!--now we are going to fetch the alien based on the aid-->
     <!--thus we create a form and a controller for that-->
@@ -28,5 +30,4 @@
 </html>
 
 <!---->
-<!--why do we need a service layout? As a controller , we are always not sure if data is coming from database.Sometimes data comes from the network, user.Thus we need to process something, that processing is done in the service layout-->
-<!--if data is coming from the repository then service layer will react with the repository-->
+<!--here we are just trying to make our own database queries-->

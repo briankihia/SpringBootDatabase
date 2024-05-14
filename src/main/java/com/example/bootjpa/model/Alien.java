@@ -45,6 +45,7 @@ public class Alien
         return "Alien{" +
                 "aid=" + aid +
                 ", aname='" + aname + '\'' +
+                ", tech='" + tech + '\'' +
                 '}';
     }
 }

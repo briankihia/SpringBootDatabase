@@ -43,6 +43,11 @@ public class AlienController
 //        below orElse art is used to remove an error that you get without it
 //        and incase client is trying to get data that is not in the database it will return null values
         Alien alien =repo.findById(aid).orElse(new Alien());
+
+        System.out.println(repo.findByTech("java"));
+        System.out.println(repo.findByAidGreaterThan(102));
+        System.out.println(repo.findByTechSorted("Android"));
+
 //        above we put some data in alien and then we use ModelAndView and put data content of alien
 //        after writing below, we can now access the data in our template but using alien
         mv.addObject(alien);
