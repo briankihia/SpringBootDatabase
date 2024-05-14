@@ -30,4 +30,8 @@
 </html>
 
 <!---->
-<!--here we are just trying to make our own database queries-->
+<!--getting information not provided by human needs other ways of getting it, thats where we use web services to get info in XML and JSON format-->
+<!--best way to implement web service is rest-->
+<!--instead of having http://localhost:8080/getAlien?aid=101, what makes more sense is http://localhost:8080/alien/102 because it looks like you are accessing  resource-->
+<!--http://localhost:8080/resource you want to get/ inner resource-->
+<!--what we need to change is the mapping in Controller-->

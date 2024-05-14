@@ -2,16 +2,19 @@ package com.example.bootjpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.bootjpa.model.Alien;
 import com.example.bootjpa.dao.AlienRepo;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class AlienController
 {
-//    we create an implementation of this repository
+
     @Autowired
     AlienRepo repo;
 
@@ -21,8 +24,7 @@ public class AlienController
         return "home.jsp";
     }
 
-//    we create a controller that will accept addAlien
-//    below is used to send data to the database
+
     @RequestMapping("/addAlien")
     public String addAlien(Alien alien)
     {
@@ -30,29 +32,32 @@ public class AlienController
         return "home.jsp";
     }
 
-//    this is the controller for get alien
-//    we don't want to get alien we just want the id
-//    we will also use requestParam which is used to get data from client
-//    we use ModelAndView because we are getting data and using it not sending to database
-    @RequestMapping("/getAlien")
-    public ModelAndView getAlien(@RequestParam int aid)
+
+    @RequestMapping("/aliens")
+    @ResponseBody
+    public String getAliens()
     {
-//        below showAlien.jsp is a view name put where a constructor should be
-//        the below ModelAndView doesn't contain anything at first, it's just use to store data
-        ModelAndView mv = new ModelAndView("showAlien.jsp");
-//        below orElse art is used to remove an error that you get without it
-//        and incase client is trying to get data that is not in the database it will return null values
-        Alien alien =repo.findById(aid).orElse(new Alien());
+//        when we say public String above , it expects we return a view name but here we are not returning a view name, we are returning a data thus add annotation
+//        @ResponseBody
 
-        System.out.println(repo.findByTech("java"));
-        System.out.println(repo.findByAidGreaterThan(102));
-        System.out.println(repo.findByTechSorted("Android"));
+//        when using web services we dont need jsp thus we dont need ModelAndView object. All you need is data
+//          find all returns all aliens.Part of your repository
+        return repo.findAll().toString();
+    }
 
-//        above we put some data in alien and then we use ModelAndView and put data content of alien
-//        after writing below, we can now access the data in our template but using alien
-        mv.addObject(alien);
-//        when you use mv you just return mv
-        return mv;
+//    we also want a user can search with id also eg, localhost:8080/aliens/102 thus we create this method
+
+    @RequestMapping("/aliens/{aid}")
+    @ResponseBody
+    public String getAlien(@PathVariable("aid") int aid)
+    {
+//        @PathVariable helps the data coming in @RequestMapping to go to argument in getAlien
+//        when we say public String above , it expects we return a view name but here we are not returning a view name, we are returning a data thus add annotation
+//        @ResponseBody
+
+//        when using web services we dont need jsp thus we dont need ModelAndView object. All you need is data
+//          find all returns all aliens.Part of your repository
+        return repo.findById(aid).toString();
     }
 
 }
