@@ -30,5 +30,5 @@
 </html>
 
 <!---->
-<!--sending data in jason format-->
-<!--changing crudRepository to JpaRepository because jpaRepository is interface which extends paging and sorting repository which indirectly extends crudRepository-->
+<!--normally if you want to fetch values you can do that with browser, but if you want to send a json,delete a resource and update a resource, you will be needing a client ie postman-->
+

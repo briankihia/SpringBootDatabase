@@ -36,7 +36,8 @@ public class AlienController
     }
 
 
-    @RequestMapping("/aliens")
+//    I have added the below part, path & produces, they limit server to only getting data in xml format
+    @RequestMapping(path="/aliens", produces = {"application/xml"})
     @ResponseBody
     public List<Alien> getAliens()
     {
@@ -50,7 +51,7 @@ public class AlienController
 
 //    we also want a user can search with id also eg, localhost:8080/aliens/102 thus we create this method
 
-    @RequestMapping("/aliens/{aid}")
+    @RequestMapping("/alien/{aid}")
     @ResponseBody
     public Optional<Alien> getAlien(@PathVariable("aid") int aid)
     {
