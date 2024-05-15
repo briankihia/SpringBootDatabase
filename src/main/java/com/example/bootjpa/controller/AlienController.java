@@ -24,12 +24,29 @@ public class AlienController
         return "home.jsp";
     }
 
+//    below is a mapping for deleting data
+//    we use a delete mapping
+//    NB- we are using the same url in all this methods but a different request. URL= alien but request's are 3= delete, get and post
+//    remember in this delete we are using id to delete thus we specify aid
+    @DeleteMapping("/alien/{aid}")
+    public String deleteAlien(@PathVariable("aid") int aid)
+    {
+//        here we wanna return an alien, and where do we get the alien?using a get method
+//        so first we have to check, do we have that method if we're deleting
+        Alien a = repo.getOne(aid);
+//        now we perform a delete operation
+//        we have method called delete where we need to pass an object
+//        and we're deleting from repo that's why we start with repo
+//        repo contains our data that's why
+        repo.delete(a);
+//        once the object is deleted you cannot return it thus we change our return to return a string
+        return "deleted";
+    }
 
-//    we change url below to just alien
-//    there are now 2 methods with a url of alien. but this one is for post request and the other for get request
-//    for below methods to know which is which, post and get, change annotation @RequestMapping to @PostMapping
-//    below I have consumes which is used to control what type of data a client can send to the server.
-//    when server sends data to server the server consumes but server sending data to client is producing.
+
+
+
+
     @PostMapping(path="/alien", consumes= {"application/json"})
     public Alien addAlien(@RequestBody Alien alien)
     {
@@ -38,30 +55,35 @@ public class AlienController
     }
 
 
-//    supporting both xml and json
+//
     @GetMapping (path="/aliens")
     public List<Alien> getAliens()
     {
-//        when we say public String above , it expects we return a view name but here we are not returning a view name, we are returning a data thus add annotation
-//        @ResponseBody
-
-//        when using web services we dont need jsp thus we dont need ModelAndView object. All you need is data
-//          find all returns all aliens.Part of your repository
+//
         return repo.findAll();
     }
+
+
+    //    we also want to update data thus we create it's method
+//    in our postman we use PUT since there is no update
+//    if data is not available it is created, if available, it is updated
+//    we use PutMapping
+//    also uses the same method as POST
+    @PutMapping(path="/alien",consumes= {"application/json"})
+    public Alien saveOrUpdateAlien(@RequestBody Alien alien)
+    {
+        repo.save(alien);
+        return alien;
+    }
+
+
 
 //    we also want a user can search with id also eg, localhost:8080/aliens/102 thus we create this method
 
     @RequestMapping("/alien/{aid}")
     public Optional<Alien> getAlien(@PathVariable("aid") int aid)
     {
-//        Optional<Alien> is used to return alien and if it doesn't find it returns optional data
-//        @PathVariable helps the data coming in @RequestMapping to go to argument in getAlien
-//        when we say public String above , it expects we return a view name but here we are not returning a view name, we are returning a data thus add annotation
-//        @ResponseBody
-
-//        when using web services we dont need jsp thus we dont need ModelAndView object. All you need is data
-//          find all returns all aliens.Part of your repository
+//
         return repo.findById(aid);
     }
 

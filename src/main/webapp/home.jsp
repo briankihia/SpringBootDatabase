@@ -30,5 +30,6 @@
 </html>
 
 <!---->
-<!--POST(sending data from client to server-->
+<!--DELETE and PUT operation in REST-->
+<!--to do a delete operation,there should be a mapping in server side thus we go to the controller to add that-->
 
