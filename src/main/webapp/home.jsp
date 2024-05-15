@@ -30,5 +30,5 @@
 </html>
 
 <!---->
-<!--normally if you want to fetch values you can do that with browser, but if you want to send a json,delete a resource and update a resource, you will be needing a client ie postman-->
+<!--POST(sending data from client to server-->
 
